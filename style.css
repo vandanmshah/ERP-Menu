@@ -5,7 +5,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #fafafa;
+    background: white;
 }
 a {
     color: white;
@@ -64,12 +64,21 @@ i, span {
     transition: all 0.3s;
 }
 #sidebarCollapse{
-    width: 60px;
+    width: 30px;
     background-color: #888787;
-    writing-mode: tb-rl;
+    /*writing-mode: tb-rl;*/
     height: 100%;
     text-align: center;
     cursor: pointer;
+}
+#sidebarCollapse i, #sidebarCollapse div{
+    display: block;
+    overflow-wrap: break-word;
+    padding: 0px 10px 0px 10px;
+    position: relative;
+    top: 79px;
+    bottom: 50%;
+    top: 50%;
 }
 @media (max-width: 768px) {
     #sidebar {
@@ -117,9 +126,15 @@ i, span {
         overflow-wrap: break-word;
         /*size: 10px !important; */
     }
+    #sidebar h1, #sidebar p {
+        display: none;
+    }
     #sidebar.active img {
         position: relative !important;
         display: block;
+    }
+    .dropdown-content .down {
+        margin-left: -40px !important;
     }
 }
 .dropdown {

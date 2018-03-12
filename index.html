@@ -94,13 +94,14 @@
             <!-- Page Content Holder -->
             <div id="content">
                 <div id="sidebarCollapse">
-                    <i class="glyphicon glyphicon-chevron-right" style="margin-bottom: 92px;right: 20px;"></i>
+                    <i class="glyphicon glyphicon-chevron-right"></i>
                     <div>EXPAND</div>
                 </div>
         </div>
          <script type="text/javascript">
              $(document).ready(function () {
-                 $('#sidebarCollapse').on('click', function () {
+                var touchStart = false;
+                $('#sidebarCollapse').on('click', function () {
                      $('#sidebar').toggleClass('active');
                         $('#sidebarCollapse i').toggleClass('glyphicon-chevron-right');
                         $('#sidebarCollapse i').toggleClass('glyphicon-chevron-left');
@@ -111,24 +112,31 @@
                             $('#sidebarCollapse div').text('COLLAPSE');
                         }
                  });
-                 $('.components').on('mouseover', function () {
-                    var $dropdown = $(this).find('.dropdown-content'); 
-                    if ($('nav#sidebar.active').length > 0) {
-                         $dropdown.css({
-                            left: $('#content').offset().left - 23,
-                            top: $('.components').offset().top
-                         });
-                        $dropdown.find('.arrow').addClass('right');
-                        $dropdown.find('.arrow').removeClass('down');
-                    }
-                    else {
-                        $dropdown.find('.arrow').addClass('down');
-                        $dropdown.find('.arrow').removeClass('right');
-                         $dropdown.css({
-                            left: '',
-                            top: ''
-                         })
-                     // debugger;
+                 $('.components').on('touchstart', function () {
+                    touchStart = true;
+                    $('.down').css({
+                        'display': 'none'
+                    });
+                 });
+                $('.components').on('mouseover', function () {
+                    if (touchStart === false) {
+                        var $dropdown = $(this).find('.dropdown-content');
+                        if ($('nav#sidebar.active').length > 0) {
+                             $dropdown.css({
+                                left: $('#content').offset().left - 23,
+                                top: $('.components').offset().top
+                             });
+                            $dropdown.find('.arrow').addClass('right');
+                            $dropdown.find('.arrow').removeClass('down');
+                        }
+                        else {
+                            $dropdown.find('.arrow').addClass('down');
+                            $dropdown.find('.arrow').removeClass('right');
+                             $dropdown.css({
+                                left: '',
+                                top: ''
+                             })
+                        }
                     }
                  });
              });
